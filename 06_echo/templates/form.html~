@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> LOGIN PAGE </title>
+  </head>
+  <body>
+    <form method = "POST" action = "auth">
+      <input type = "text" name = "username">
+      <input type = "submit" name = "sub">
+    </form> 
+     <br>
+  </body>
+</html> 
