@@ -16,25 +16,30 @@ c = db.cursor()    #facilitate db ops
 #==========================================================
 #INSERT YOUR POPULATE CODE IN THIS ZONE
 
-def create_table(table_name, columns):
-    return "CREATE TABLE " + table_name + " (" + columns + ")"
+#Create a table with the specified name and column number
+def create_table(table_name, num_c):
+    return "CREATE TABLE " + table_name + " (" + num_c + ")"
 
-def insert_data(csvfile, table_name):
-    f = open(csvfile, 'rU')
-    reader = csv.DictReader(f)
-    for row in reader:
-        comm = "INSERT INTO " + table_name + ' VALUES ('
+#fill the table with contents of the inputted csv file
+def populate(csv_file, table_name):
+    f = open(csv_file, 'rU')
+    read = csv.DictReader(f)
+    for row in read:
+        #insert into the table each comma separated value in the row
+        j = "INSERT INTO " + table_name + " VALUES ("
         for field in row:
-            comm += '"' + row[field] + '",'
-        comm = comm[0:-1]
-        comm += ")"
-        c.execute(comm)
+            j += '"' + row[field] + '",'
+        j = j[0:-1]
+        j += ")"
+        c.execute(j)
     f.close()
 
-c.execute(create_table('courses', 'code TEXT, mark INTEGER, id INTEGER'))
-c.execute(create_table('peeps', 'name TEXT, age INTEGER, id INTEGER'))
-insert_data('courses.csv', 'courses')
-insert_data('peeps.csv', 'peeps')
+#create the table 
+c.execute(create_table("courses", "code TEXT, mark INTEGER, id INTEGER"))
+c.execute(create_table("peeps", "name TEXT, age INTEGER, id INTEGER"))
+#insert the values in the csv file
+populate("courses.csv", "courses")
+populate("peeps.csv", "peeps")
 
 #==========================================================
 db.commit() #save changes
