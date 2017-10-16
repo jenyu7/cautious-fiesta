@@ -44,6 +44,9 @@ populate("courses.csv", "courses")
 populate("peeps.csv", "peeps")
 
 foo = c.execute("SELECT name, peeps.id, mark FROM peeps, courses WHERE peeps.id = courses.id")
+
+for bar in foo:
+    print bar
 print foo.fetchall()
 
 
